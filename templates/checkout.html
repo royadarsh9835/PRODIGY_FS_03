@@ -1,0 +1,196 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now - RedFood</title>
+</head>
+<style>
+    body {
+        background-color: #110101;
+        margin: 0;
+        font-family: monospace;
+    }
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        opacity: 0.95;
+        margin-left: 0;
+    }
+    
+    .left-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .left-section img {
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+    }
+    
+    .left-section h1 {
+        font-family: monospace;
+        color: rgb(249, 216, 93);
+        margin-left: 20px;
+    }
+    
+    .right-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .button {
+        display: inline-block;
+        margin-left: 20px;
+        padding: 10px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(254, 246, 246);
+    }
+    
+    .button1 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .search1 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        border-radius: 5%;
+    }
+    
+    .button2 {
+        display: inline-block;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .button3 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .order-content {
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        width: 60%;
+        margin: 20px auto;
+    }
+    
+    .order-title {
+        text-align: center;
+        color: #110101;
+        font-size: 2rem;
+    }
+    
+    .order-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .order-form form {
+        width: 100%;
+        max-width: 600px;
+    }
+    
+    .order-form label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #0a0101;
+    }
+    
+    .order-form input, .order-form textarea, .order-form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .j{
+        color: white;
+    }
+</style>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <img src="{% static 'images/logo.png' %}" alt="logo">
+            <h1>RedFood.</h1>
+        </div>
+        <div class="right-section">
+            {% if user.is_authenticated %}
+            <p class="j">Hello, {{ user.first_name }}</p>
+            <a href="{% url 'checkout' %}" class="button3">Check out ⤅</a>
+            <a href="{% url 'order' %}" class="button1">Order now ⤅</a>
+            <a href="{% url 'aboutus' %}" class="button">About us</a>
+            <a href="{% url 'logout' %}" class="button">Logout</a>
+        {% else %}
+            <a href="{% url 'aboutus' %}" class="button">About us</a>
+            <a href="{% url 'register' %}" class="button">Register</a>
+            <a href="{% url 'login' %}" class="button">Login</a>
+        {% endif %}
+        
+        </div>
+    </div>
+    <div class="order-content">
+        <h1 class="order-title">Place Your Order</h1>
+        <div class="order-form">
+            <form method="post">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="delivery_address">Delivery Address:</label>
+                <textarea id="delivery_address" name="delivery_address" required></textarea>
+
+                <label for="food-item">Select Food Item:</label>
+                <select id="food-item" name="food-item" required>
+                    <option value="pizza">Pizza - $12.99</option>
+                    <option value="kids-meal">Kids Meal - $6.99</option>
+                    <option value="burger">Burger - $8.99</option>
+                    <option value="salad">Salad - $7.99</option>
+                    <option value="pancakes">Pancakes - $5.99</option>
+                    <option value="combo-meal">Combo Meal - $14.99</option>
+                    <option value="juice">Juice - $3.99</option>
+                    <option value="cake">Cake - $4.99</option>
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+
+                <button type="submit" class="button1">Submit Order</button>
+            </form>
+        </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

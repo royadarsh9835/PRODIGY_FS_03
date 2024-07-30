@@ -1,0 +1,159 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RedFood</title>
+</head>
+<style>
+    body {
+        background-color: #110101;
+        margin: 0;
+        font-family: monospace;
+    }
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        opacity: 0.95;
+        margin-left: 0;
+    }
+    
+    .left-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .left-section img {
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+    }
+    
+    .left-section h1 {
+        font-family: monospace;
+        color: rgb(249, 216, 93);
+        margin-left: 20px;
+    }
+    
+    .right-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .button {
+        display: inline-block;
+        margin-left: 20px;
+        padding: 10px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(254, 246, 246);
+    }
+    
+    .button1 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .search1 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        border-radius: 5%;
+    }
+    
+    .button2 {
+        display: inline-block;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .button3 {
+        display: inline-block;
+        margin-left: 40px;
+        padding: 5px;
+        opacity: 0.9;
+        text-decoration: none;
+        color: rgb(18, 16, 16);
+        background-color: yellow;
+        border-radius: 5%;
+    }
+    
+    .aboutus-content {
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        width: 60%;
+        margin: 20px auto;
+    }
+    
+    .aboutus-title {
+        text-align: center;
+        color: #110101;
+        font-size: 2rem;
+    }
+    
+    .aboutus-info {
+        color: #110101;
+        line-height: 1.6;
+    }
+    
+    .aboutus-info p {
+        margin-bottom: 15px;
+    }
+    .j{
+        color: white;
+    }
+    
+</style>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <img src="{% static 'images/logo.png' %}" alt="logo">
+            <h1>RedFood.</h1>
+        </div>
+        <div class="right-section">
+            {% if user.is_authenticated %}
+            <p class="j">Hello, {{ user.first_name }}</p>
+            <a href="{% url 'checkout' %}" class="button3">Check out ⤅</a>
+            <a href="{% url 'order' %}" class="button1">Order now ⤅</a>
+            <a href="{% url 'aboutus' %}" class="button">About us</a>
+            <a href="{% url 'logout' %}" class="button">Logout</a>
+        {% else %}
+            <a href="{% url 'aboutus' %}" class="button">About us</a>
+            <a href="{% url 'register' %}" class="button">Register</a>
+            <a href="{% url 'login' %}" class="button">Login</a>
+        {% endif %}
+        
+        </div>
+    </div>
+    <div class="aboutus-content">
+        <h1 class="aboutus-title">About Us</h1>
+        <div class="aboutus-info">
+            <p>Welcome to RedFood, your number one source for delicious and quick meals. We're dedicated to providing you with the best dining experience, with a focus on quality, freshness, and customer satisfaction.
+            </p>
+            <p>Founded in 2024 by food enthusiasts, RedFood has come a long way from its beginnings in a small kitchen. We now serve customers all over the world and are thrilled to be a part of the fast-growing food industry.
+            </p>
+            <p>We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don't hesitate to contact us.
+            </p>
+            <p>Sincerely,<br>The RedFood Team</p>
+        </div>
+    </div>
+</body>
+</html>
